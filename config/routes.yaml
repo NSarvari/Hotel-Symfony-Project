@@ -1,3 +1,15 @@
-number:
+# config/routes.yaml
+
+index:
     path: /
     controller: App\Controller\MainController::index
+
+app_accommodation_getAccom:
+    path: /accommodation
+    controller: App\Controller\AccommodationController::getAccom
+security_login:
+    path: /login
+    controller: App\Controller\SecurityController::login
+register:
+    path: /register
+    controller: App\Controller\UserController::register
