@@ -79,9 +79,9 @@ class User implements UserInterface
         return [];
     }
 
-    public function getUsername()
+    public function getUsername(): string
     {
-        //
+        return (string) $this->email;
     }
 
     public function getSalt()
