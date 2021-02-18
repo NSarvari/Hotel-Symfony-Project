@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -32,6 +33,17 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      */
     private $fullName;
+
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="App\Entity\Accommodation", mappedBy="author")
+     */
+    private $accommodations;
+
+    public function __construct()
+    {
+        $this->accommodations=new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -93,4 +105,23 @@ class User implements UserInterface
     {
        //
     }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getAccommodations(): ArrayCollection
+    {
+        return $this->accommodations;
+    }
+
+    /**
+     * @param Accommodation $accommodation
+     * @return User
+     */
+    public function addAccommodations(Accommodation $accommodation)
+    {
+        $this->accommodations[] = $accommodation;
+        return $this;
+    }
+
 }

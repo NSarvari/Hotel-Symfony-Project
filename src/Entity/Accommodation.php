@@ -25,7 +25,7 @@ class Accommodation
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $describtion;
+    private $description;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -33,9 +33,16 @@ class Accommodation
     private $image;
 
     /**
-     * @return User
+     * @var int
+     * @ORM\Column (name="authorId", type="integer")
+     */
+    private $authorId;
+
+    /**
+     * @var User
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\User" inversedBy="accommodations")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="accommodations")
+     * @ORM\JoinColumn(name="authorId", referencedColumnName="id")
      */
     private $author;
 
@@ -56,14 +63,14 @@ class Accommodation
         return $this;
     }
 
-    public function getDescribtion(): ?string
+    public function getDescription(): ?string
     {
-        return $this->describtion;
+        return $this->description;
     }
 
-    public function setDescribtion(string $describtion): self
+    public function setDescription(string $description): self
     {
-        $this->describtion = $describtion;
+        $this->description = $description;
 
         return $this;
     }
@@ -81,9 +88,27 @@ class Accommodation
     }
 
     /**
+     * @return int
+     */
+    public function getAuthorId(): int
+    {
+        return $this->authorId;
+    }
+
+    /**
+     * @param integer $authorId
+     * @return Accommodation
+     */
+    public function setAuthorId($authorId)
+    {
+        $this->authorId = $authorId;
+        return $this;
+    }
+
+    /**
      * @return User
      */
-    public function getAuthor()
+    public function getAuthor(): User
     {
         return $this->author;
     }

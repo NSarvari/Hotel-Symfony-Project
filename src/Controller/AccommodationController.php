@@ -1,5 +1,5 @@
 <?php
-// src/Controller/AccommodationController.php
+
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
