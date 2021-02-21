@@ -4,12 +4,12 @@ index:
     path: /
     controller: App\Controller\MainController::index
 
-app_accommodation_getAccom:
+app_accommodation_create:
     path: /accommodation
-    controller: App\Controller\AccommodationController::getAccom
+    controller: App\Controller\AccommodationController::create
 security_login:
     path: /login
     controller: App\Controller\SecurityController::login
-register:
-    path: /register
-    controller: App\Controller\UserController::register
+user-new:
+    path: /new
+    controller: App\Controller\UserController::new

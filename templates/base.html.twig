@@ -12,12 +12,18 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent"></div>
             <ul class="nav navbar-nav navbar-right">
                 {% if app.user %}
-                    <li><a class="nav-link" href="{{ path('security_logout') }}">Logout</a></li>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <li><a class="nav-link" href="{{ path('app_accommodation_create') }}">Accommodation</a></li>
+                        <li><a class="nav-link" href="{{ path('user_index') }}">User</a></li>
+                        <li><a class="nav-link" href="{{ path('app_logout') }}">Logout</a>
+                    {% else %}
+                        <li><a class="nav-link" href="{{ path('app_accommodation_create') }}">Accommodation</a></li>
+                        <li><a class="nav-link" href="{{ path('app_logout') }}">Logout</a>
+                    {% endif %}
                 {% else %}
-                    <li><a class="nav-link" href="{{ path('app_accommodation_getAccom') }}">Accommodation</a></li>
                     <li><a class="nav-link" href="{{ path('security_login') }}">Login</a></li>
                     <li>
-                        <a class="nav-link" href="{{ path('register') }}">Register</a>
+                        <a class="nav-link" href="{{ path('user-new') }}">Register</a>
                     </li>
                 {% endif %}
             </ul>

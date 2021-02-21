@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class AccommodationController extends AbstractController
 {
-    public function getAccom()
+    public function create()
     {
 
         return $this->render('accom.html.twig');

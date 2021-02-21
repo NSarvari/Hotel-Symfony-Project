@@ -96,8 +96,9 @@ class AppCustomAuthenticator extends AbstractFormLoginAuthenticator implements P
             return new RedirectResponse($targetPath);
         }
 
-        return new RedirectResponse($this->urlGenerator->generate('home'));
-        //throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
+        // For example : return new RedirectResponse($this->urlGenerator->generate('some_route'));
+        return new RedirectResponse($this->urlGenerator->generate('user_index'));
+        throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 
     protected function getLoginUrl()
