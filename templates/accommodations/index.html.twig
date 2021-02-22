@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accommodation index{% endblock %}
+
+{% block body %}
+    <h1>Accommodation index</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Image</th>
+            <th>Author Id</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for accommodation in accommodations %}
+            <tr>
+                <td>{{ accommodation.id }}</td>
+                <td>{{ accommodation.type }}</td>
+                <td>{{ accommodation.description }}</td>
+                <td>{{ accommodation.image }}</td>
+                <td>{{ accommodation.authorId }}</td>
+                <td>
+                    <a href="{{ path('accommodation_show', {'id': accommodation.id}) }}">show</a>
+                    <a href="{{ path('accommodation_edit', {'id': accommodation.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('accommodation-create') }}">Create new</a>
+{% endblock %}

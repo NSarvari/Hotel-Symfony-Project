@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -39,6 +41,12 @@ class User implements UserInterface
      */
     private $fullName;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\Accommodation", mappedBy="author")
+     */
+    private $accommodations;
     public function getId(): ?int
     {
         return $this->id;
@@ -63,7 +71,7 @@ class User implements UserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->email;
+        return $this->email;
     }
 
     /**
@@ -88,9 +96,9 @@ class User implements UserInterface
     /**
      * @see UserInterface
      */
-    public function getPassword(): string
+    public function getPassword(): ?string
     {
-        return (string) $this->password;
+        return $this->password;
     }
 
     public function setPassword(string $password): self
@@ -131,4 +139,28 @@ class User implements UserInterface
 
         return $this;
     }
+
+    /**
+     * @return Collection
+     */
+    public function getAccommodations(): Collection
+    {
+        return $this->accommodations;
+    }
+
+    /**
+     * @param ArrayCollection $accommodations
+     *
+     * @return  User
+     */
+    public function setAccommodations(Accommodation $accommodation)
+    {
+        $this->accommodations[] = $accommodation;
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->fullName;
+}
 }

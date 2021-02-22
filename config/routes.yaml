@@ -4,9 +4,9 @@ index:
     path: /
     controller: App\Controller\MainController::index
 
-app_accommodation_create:
+app_accommodation:
     path: /accommodation
-    controller: App\Controller\AccommodationController::create
+    controller: App\Controller\AccommodationController::index
 security_login:
     path: /login
     controller: App\Controller\SecurityController::login

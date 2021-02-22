@@ -108,7 +108,7 @@ class Accommodation
     /**
      * @return User
      */
-    public function getAuthor(): User
+    public function getAuthor()
     {
         return $this->author;
     }
