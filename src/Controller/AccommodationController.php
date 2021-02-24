@@ -9,9 +9,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @Route("/accommodation")
+ * @Vich\Uploadable()
  */
 class AccommodationController extends AbstractController
 {
@@ -44,6 +46,9 @@ class AccommodationController extends AbstractController
             return $this->redirectToRoute('accommodation_index');
         }
 
+        $file = $form->getData()->getImage();
+
+        $fileName = md5(uniqid('', true));
         return $this->render('accommodations/create.html.twig', [
             'accommodation' => $accommodation,
             'form' => $form->createView(),
@@ -70,6 +75,7 @@ class AccommodationController extends AbstractController
 
         if ($form->isSubmitted()) {
             $accommodation->setAuthor($this->getUser());
+
             $entityManager = $this->getDoctrine()->getManager();
 
             $entityManager->persist($accommodation);

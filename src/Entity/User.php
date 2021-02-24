@@ -47,6 +47,11 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity="App\Entity\Accommodation", mappedBy="author")
      */
     private $accommodations;
+
+    public function __construct()
+    {
+        $this->accommodations = new ArrayCollection();
+    }
     public function getId(): ?int
     {
         return $this->id;
@@ -163,4 +168,26 @@ class User implements UserInterface
     {
         return $this->fullName;
 }
+
+    public function addAccommodation(Accommodation $accommodation): self
+    {
+        if (!$this->accommodations->contains($accommodation)) {
+            $this->accommodations[] = $accommodation;
+            $accommodation->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAccommodation(Accommodation $accommodation): self
+    {
+        if ($this->accommodations->removeElement($accommodation)) {
+            // set the owning side to null (unless already changed)
+            if ($accommodation->getAuthor() === $this) {
+                $accommodation->setAuthor(null);
+            }
+        }
+
+        return $this;
+    }
 }

@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Accommodation;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\PropertyInfo\Type;
@@ -16,7 +17,7 @@ class AppAccommodationType extends AbstractType
         $builder
             ->add('type')
             ->add('description')
-            ->add('image')
+            ->add('image', FileType::class, array('data_class'=>null))
             ->add('authorId')
             ->add('author')
         ;
